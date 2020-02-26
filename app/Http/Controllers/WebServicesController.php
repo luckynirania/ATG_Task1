@@ -15,6 +15,10 @@ class WebServicesController extends Controller {
         return response($data, 200);
     }
 
+    public function adduser() {
+        return view('ajaxview');
+    }
+
     public function store(Request $request) {
         $ans = $this->validation($request);
         $validator = $ans[0];
@@ -24,7 +28,7 @@ class WebServicesController extends Controller {
             return response()->json([
                 "status" => 0,
                 "error" => $err
-            ], 404);
+            ], 200);
         }
  
         $temp = $this->addentry($request);
@@ -32,7 +36,7 @@ class WebServicesController extends Controller {
         return response()->json([
             "status" => 1,
             "msg" => "'" . $temp['name'] . "' is created with email '" . $temp['email'] . "' and pincode '" . $temp['pincode'] . "'"
-        ], 201);
+        ], 200);
     }
 
 }
