@@ -14,7 +14,7 @@ use Illuminate\Http\Request;
 */
 
 Route::post('adduser', 'WebServicesController@store')->name('store');
-Route::get('allusers', 'WebServicesController@getdata')->name('ret_data');
+Route::get('allusers', 'WebServicesController@ret_data')->name('ret_data');
 
 // Route::apiResource('books', 'WebServicesController');
 
