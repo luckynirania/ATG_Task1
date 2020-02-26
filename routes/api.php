@@ -13,6 +13,11 @@ use Illuminate\Http\Request;
 |
 */
 
+Route::post('adduser', 'WebServicesController@store')->name('store');
+Route::get('allusers', 'WebServicesController@getdata')->name('ret_data');
+
+// Route::apiResource('books', 'WebServicesController');
+
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });

@@ -5,53 +5,33 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\users;
+use App\Http\Traits\TraitFile;
 
-class ATGController extends Controller
-{
-    //
+class ATGController extends Controller {
+    use TraitFile;
+    
     public function adduser() {
         return view('adduser');
     }
 
     public function home() {
-
-        $data = users::all();
-
+        $data = $this->getdata();
         return view('welcome',compact('data'));
     }
 
-    // protected function validator(array $data)
-    // {
-    //     return Validator::make($data, [
-    //         'name' => ['required', 'string', 'max:255'],
-    //         'email' => ['required', 'string', 'email', 'max:255', 'unique:user_info'],
-    //         'pincode' => ['required', 'string', 'min:6', 'max:6' ],
-    //     ]);
-    // }
-
     public function store(Request $request){
+        $ans = $this->validation($request);
+        $validator = $ans[0];
 
-        $this->validate(
-            $request, [
-                'name' => ['required', 'string', 'max:255','unique:user_info'],
-                'email' => ['required', 'regex:/^.+@.+\..+$/i', 'max:255', 'unique:user_info'],
-                'pincode' => ['required', 'string', 'digits:6', 'unique:user_info' ]
-            ]
-        );
+        if ($validator->fails()) {
+            return redirect('/adduser')
+                ->withErrors($validator)
+                ->withInput();
+        }
 
+        $temp = $this->addentry($request);
 
- 
-        $user = new users();
- 
-        $user->name = request('name');
-        $user->email = request('email');
-        $user->pincode = request('pincode');
-
-        $temp = $user->name;
- 
-        $user->save();
-
-        return redirect()->route('home')->with('success', ''.$temp.' Added Successfully');   
+        return redirect()->route('home')->with('success', ''.$temp['name'].' Added Successfully');   
  
     }
 
