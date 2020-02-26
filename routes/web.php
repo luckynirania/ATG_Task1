@@ -12,7 +12,7 @@
 */
 
 Route::get('/', 'ATGController@home')->name('home');
-Route::post('/adduser', 'ATGController@store')->name('adduser');
-Route::get('/adduser', 'ATGController@adduser')->name('adduser');
+// Route::post('/adduser', 'ATGController@store')->name('adduser');
+Route::get('/adduser', 'WebServicesController@adduser')->name('adduser');
 
 Auth::routes();
