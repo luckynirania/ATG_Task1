@@ -59,7 +59,6 @@
         $("#email-error").html("");
         $("#pincode-error").html("");
         $("#loki").html("");
-        $("#send_form").html("Sending...");
       $.ajax({
         url: '/api/adduser' ,
         type: "POST",
@@ -77,8 +76,7 @@
             else {
                 $("#loki").html(response.msg);
             }
-        }
-        $("#send_form").html("Submit");        
+        }        
       });
     }
   })
