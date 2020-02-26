@@ -55,7 +55,10 @@
               'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
           }
       });
-      
+      $("#name-error").html("");
+        $("#email-error").html("");
+        $("#pincode-error").html("");
+        $("#loki").html("");
       $.ajax({
         url: '/api/adduser' ,
         type: "POST",
